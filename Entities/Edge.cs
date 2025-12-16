@@ -8,7 +8,6 @@ public enum EdgeType
 
 public class TaskEdge: IEntity
 {
-    
     public Id Id { get; init; }
     public Id From { get; set; }
     public Id To { get; set; }
