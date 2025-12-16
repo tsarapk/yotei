@@ -104,9 +104,14 @@ public class TaskRepository : IRepository<TaskNode>
         uncompleted = null;
         
         if (task.Meta.PerfomedBy != _actors.GetCurrent)
-            return Result.WrongActor; 
+            return Result.WrongActor;
+
         if (!_incoming.TryGetValue(task.Id, out var incoming))
+        {
+            task.SetStatus(TaskStatus.Completed);
             return Result.OK;
+        }
+            
         
         List<Id>? temp = null;
         foreach (var child in incoming)
