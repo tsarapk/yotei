@@ -130,7 +130,11 @@ public class TaskRepository : IRepository<TaskNode>
         task.SetStatus(TaskStatus.Completed);
 
         if (!_outgoing.TryGetValue(task.Id, out var outgoing))
+        {
+            task.SetStatus(TaskStatus.Completed);
             return Result.OK;
+        }
+          
         
         foreach (var e in outgoing)
         {
